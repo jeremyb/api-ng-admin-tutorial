@@ -1,0 +1,10 @@
+- name: Install nodejs and npm
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - nodejs
+    - npm
+
+- name: Install Bower npm package
+  npm: name={{ item }} state=present global=yes
+  with_items:
+    - bower

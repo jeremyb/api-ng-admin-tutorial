@@ -1,0 +1,31 @@
+---
+- name: Update apt
+  apt: update_cache=yes
+
+- name: Install System Packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - vim
+    - curl
+    - wget
+    - python-software-properties
+
+- name: Install git and zsh
+  apt: pkg={{ item }} state=latest
+  with_items:
+   - git
+   - zsh
+
+- name: Install oh-my-zsh
+  sudo: false
+  git: >
+    repo=https://github.com/robbyrussell/oh-my-zsh.git
+    dest=/home/vagrant/.oh-my-zsh
+    update=yes
+
+- name: Configure oh-my-zsh
+  sudo: false
+  shell: cp /home/vagrant/.oh-my-zsh/templates/zshrc.zsh-template /home/vagrant/.zshrc
+
+- name: Settings zsh as default shell
+  shell: chsh -s $(which zsh) vagrant

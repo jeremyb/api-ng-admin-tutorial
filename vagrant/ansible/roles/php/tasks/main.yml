@@ -1,0 +1,15 @@
+---
+- name: Install PHP and dependencies
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php5-cli
+    - php5-curl
+    - php5-mcrypt
+    - php5-gd
+    - php5-intl
+    - php5-sqlite
+
+- name: Ensure timezone is set in cli php.ini
+  lineinfile: dest=/etc/php5/cli/php.ini
+              regexp='date.timezone ='
+              line='date.timezone = {{ timezone }}'

@@ -1,0 +1,13 @@
+---
+- name: Symfony2 app with Vagrant and Ansible
+  hosts: all
+  sudo: true
+
+  vars:
+    servername: 192.168.100.100
+    timezone: Europe/Paris
+
+  roles:
+    - init
+    - php
+    - symfony

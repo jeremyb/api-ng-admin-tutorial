@@ -23,7 +23,8 @@
         "hautelook/alice-bundle": "0.2.*"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "fabpot/php-cs-fixer": "@stable"
     },
     "scripts": {
         "post-root-package-install": [

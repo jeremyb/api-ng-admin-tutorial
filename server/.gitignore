@@ -6,6 +6,7 @@
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 /app/phpunit.xml
+/app/sqlite.db
 /build/
 /vendor/
 /bin/

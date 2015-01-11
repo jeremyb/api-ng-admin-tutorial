@@ -1,0 +1,15 @@
+AppBundle\Entity\Tag:
+    tag{1..10}:
+        name: <word()>
+
+AppBundle\Entity\Post:
+    post{1..20}:
+        title: <sentence()>
+        body: <text()>
+        published: <boolean(75)>
+        tags: <numberBetween(1, 4)>x @tag*
+
+AppBundle\Entity\Comment:
+    comment{1..20}:
+        post: @post*
+        body: <paragraph(2)>

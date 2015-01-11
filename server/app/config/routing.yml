@@ -1,0 +1,11 @@
+app_post:
+    resource: app.post
+    type:     sylius.api
+
+app_comment:
+    resource: app.comment
+    type:     sylius.api
+
+app_tag:
+    resource: app.tag
+    type:     sylius.api

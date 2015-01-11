@@ -20,7 +20,12 @@
         "incenteev/composer-parameter-handler": "~2.0",
 
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "hautelook/alice-bundle": "0.2.*"
+        "hautelook/alice-bundle": "0.2.*",
+        "sylius/resource-bundle": "0.13.*@dev",
+        "sylius/resource": "0.13.*@dev",
+        "sylius/storage": "0.13.*@dev",
+        "friendsofsymfony/rest-bundle": "1.5.*@dev",
+        "nelmio/cors-bundle": "v1.3.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -1,0 +1,9 @@
+{
+  "name": "api-ng-admin-tutorial",
+  "dependencies": {
+    "ng-admin": "#master"
+  },
+  "resolutions": {
+    "angular": "~1.3.8"
+  }
+}

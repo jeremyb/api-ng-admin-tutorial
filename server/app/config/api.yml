@@ -1,14 +1,19 @@
 sylius_resource:
+    settings:
+            default_page_size: 10
+            allowed_paginate:  [5, 10, 25, 50]
+            sortable:          true
+            filterable:        true
     resources:
         app.post:
-            driver: doctrine/orm
+            driver:    doctrine/orm
             classes:
                 model: AppBundle\Entity\Post
         app.comment:
-            driver: doctrine/orm
+            driver:    doctrine/orm
             classes:
                 model: AppBundle\Entity\Comment
         app.tag:
-            driver: doctrine/orm
+            driver:    doctrine/orm
             classes:
                 model: AppBundle\Entity\Tag

@@ -3,12 +3,18 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Comment
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
+ * @Serializer\ExclusionPolicy("all")
+ * @Hateoas\Relation("post", href = "expr('/posts/' ~ object.getPostId())")
  */
 class Comment
 {
@@ -18,6 +24,8 @@ class Comment
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -25,6 +33,8 @@ class Comment
      * @var Post
      *
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+     *
+     * @Assert\NotBlank()
      */
     private $post;
 
@@ -32,6 +42,10 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="body", type="text")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
      */
     private $body;
 
@@ -39,6 +53,8 @@ class Comment
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     *
+     * @Serializer\Expose()
      */
     private $createdAt;
 
@@ -68,6 +84,16 @@ class Comment
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * @return int|null
+     *
+     * @Serializer\VirtualProperty()
+     */
+    public function getPostId()
+    {
+        return null !== $this->post ? $this->post->getId() : null;
     }
 
     /**

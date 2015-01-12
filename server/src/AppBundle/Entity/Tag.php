@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Tag
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class Tag
 {
@@ -18,6 +22,8 @@ class Tag
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -25,6 +31,10 @@ class Tag
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
      */
     private $name;
 

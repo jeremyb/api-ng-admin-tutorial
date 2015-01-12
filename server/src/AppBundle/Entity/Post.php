@@ -5,12 +5,19 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Post
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
+ * @Serializer\ExclusionPolicy("all")
+ * @Hateoas\Relation("self", href = "expr('/posts/' ~ object.getId())")
+ * @Hateoas\Relation("comments", href = "expr('/posts/' ~ object.getId() ~ '/comments/')")
  */
 class Post
 {
@@ -20,6 +27,8 @@ class Post
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -27,6 +36,10 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
      */
     private $title;
 
@@ -34,6 +47,10 @@ class Post
      * @var string
      *
      * @ORM\Column(name="body", type="text")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
      */
     private $body;
 
@@ -41,6 +58,8 @@ class Post
      * @var boolean
      *
      * @ORM\Column(name="published", type="boolean")
+     *
+     * @Serializer\Expose()
      */
     private $published;
 
@@ -48,6 +67,8 @@ class Post
      * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Tag")
+     *
+     * @Serializer\Expose()
      */
     private $tags;
 
@@ -63,8 +84,9 @@ class Post
      */
     public function __construct()
     {
-        $this->tags     = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->published = false;
+        $this->tags      = new ArrayCollection();
+        $this->comments  = new ArrayCollection();
     }
 
     /**

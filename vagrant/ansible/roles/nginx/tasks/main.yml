@@ -1,0 +1,7 @@
+---
+- name: Install Nginx
+  apt: pkg=nginx state=latest
+
+- name: Change default Nginx site
+  template: src=default dest=/etc/nginx/sites-enabled/default
+  notify: restart nginx

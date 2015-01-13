@@ -1,0 +1,24 @@
+- name: Install php5-fpm
+  sudo: yes
+  apt: pkg=php5-fpm state=latest
+
+- name: Set Unix user/group used by Nginx
+  lineinfile: "dest=/etc/php5/fpm/pool.d/www.conf state=present regexp='user = www-data' line='user = vagrant'"
+
+- name: Set Unix user/group used by Nginx
+  lineinfile: "dest=/etc/php5/fpm/pool.d/www.conf state=present regexp='group = www-data' line='group = vagrant'"
+
+- name: Set permissions on socket - owner
+  lineinfile: "dest=/etc/php5/fpm/pool.d/www.conf state=present regexp='^;?listen.owner' line='listen.owner = www-data'"
+
+- name: Set permissions on socket - group
+  lineinfile: "dest=/etc/php5/fpm/pool.d/www.conf state=present regexp='^;?listen.group' line='listen.group = www-data'"
+
+- name: Set permissions on socket - mode
+  lineinfile: "dest=/etc/php5/fpm/pool.d/www.conf state=present regexp='^;?listen.mode' line='listen.mode = 0660'"
+
+- name: Ensure timezone is set in fpm php.ini
+  lineinfile: dest=/etc/php5/fpm/php.ini
+              regexp='date.timezone ='
+              line='date.timezone = {{ timezone }}'
+  notify: restart php5-fpm

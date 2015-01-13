@@ -1,0 +1,23 @@
+server {
+    set $projectroot '/vagrant';
+
+    listen 8000 default_server;
+    server_name localhost;
+
+    location /api {
+        root $projectroot/server/web;
+        rewrite ^/api/(.*)$ /app.php/$1 break;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $projectroot/server/web/$fastcgi_script_name;
+        fastcgi_param HTTPS off;
+    }
+
+    location / {
+        root $projectroot/client/public;
+        try_files $uri $uri/ /index.html =404;
+        index index.html;
+        gzip_static on;
+    }
+}

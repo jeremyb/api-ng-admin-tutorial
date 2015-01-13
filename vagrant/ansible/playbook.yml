@@ -9,5 +9,8 @@
 
   roles:
     - init
+    - node
     - php
     - symfony
+    - nginx
+    - php-fpm

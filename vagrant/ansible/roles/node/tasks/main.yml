@@ -1,3 +1,4 @@
+---
 - name: Install nodejs and npm
   apt: pkg={{ item }} state=latest
   with_items:

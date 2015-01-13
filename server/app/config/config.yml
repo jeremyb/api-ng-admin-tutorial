@@ -78,7 +78,7 @@ fos_rest:
         default_format: json
     format_listener:
         rules:
-            - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
+            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: true }
 
 nelmio_cors:
     defaults:
@@ -90,7 +90,7 @@ nelmio_cors:
         max_age: 0
         hosts: []
     paths:
-        '^/':
+        '^/api':
             allow_origin: ['*']
             allow_headers: ['*']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']

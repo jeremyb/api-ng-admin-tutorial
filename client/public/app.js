@@ -39,21 +39,6 @@
                 params.page = params._page;
                 delete params._page;
                 delete params._perPage;
-
-                // custom sort params
-                /*if (params._sortField) {
-                    params._sort = params._sortField;
-                    delete params._sortField;
-                }*/
-
-                // custom filters
-                console.log(params._filters);
-                if (params._filters) {
-                    for (var filter in params._filters) {
-                        params[filter] = params._filters[filter];
-                    }
-                    delete params._filters;
-                }
             }
 
             return { params: params };
@@ -83,7 +68,7 @@
         });
 
         var app = new Application('ng-admin backend demo')
-            .baseApiUrl('http://localhost:8080/');
+            .baseApiUrl('http://localhost:8000/api/');
 
         var post    = new Entity('posts');
         var comment = new Entity('comments');
@@ -192,12 +177,7 @@
             .fields([
                 new Field('id').label('ID'),
                 new Field('createdAt').label('Posted').type('date'),
-                new Field('body').map(truncate),
-                new Reference('post')
-                    .label('Post')
-                    .map(truncate)
-                    .targetEntity(post)
-                    .targetField(new Field('title').map(truncate))
+                new Field('body').map(truncate)
             ])
             .listActions(['edit', 'delete']);
 

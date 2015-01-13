@@ -1,19 +1,22 @@
 app_post:
     resource: app.post
     type:     sylius.api
+    prefix:   /api
 
 app_comment:
     resource: app.comment
     type:     sylius.api
+    prefix:   /api
 
 app_tag:
     resource: app.tag
     type:     sylius.api
+    prefix:   /api
 
 # additional routes
 
 app_api_post_comments:
-    path: /posts/{id}/comments/
+    path: /api/posts/{id}/comments/
     defaults:
         _controller: app.controller.comment:indexAction
         _sylius:
